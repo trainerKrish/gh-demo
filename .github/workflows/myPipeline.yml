@@ -1,0 +1,30 @@
+name: CICD-Pipeline
+on: # Triggers
+  push:
+    branches: [ "main", "dev" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: create a file
+        run: echo "hello" > abc.txt
+        
+      - name: check the file
+        run: ls -la
+        
+      - run: |
+          echo "Karl"
+          cat abc.txt
+        name: multi line bash script
+  deploy:
+    runs-on: ubuntu-latest    
+    steps:
+      - name: create a file
+        run: echo "Your applcation has been deployed"
+
+
+  
