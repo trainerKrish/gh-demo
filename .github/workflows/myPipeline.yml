@@ -12,6 +12,7 @@ jobs:
     steps:
       - name: create a file
         run: |
+          docker ps 
           echo "hello" > abc.txt
           sleep 10
         
@@ -29,8 +30,11 @@ jobs:
     steps:
       - name: create a file
         run: |
+          aws
           echo "Your applcation has been deployed"
           sleep 35
+      
+      - run: echo "hello"
 
 
   
