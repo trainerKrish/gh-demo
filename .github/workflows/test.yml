@@ -8,5 +8,5 @@ jobs:
   job-1:
     runs-on: ubuntu-latest
     steps:
-      - run: git clone https://github.com/trainerKrish/gh-demo.git
+      - uses: actions/checkout@v4
       - run: ls -la 
