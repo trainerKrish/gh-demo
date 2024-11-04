@@ -8,4 +8,4 @@ jobs:
   job-1:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Karl"
+      - run: ls -la 
