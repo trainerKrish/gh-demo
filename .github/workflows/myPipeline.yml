@@ -1,7 +1,7 @@
 name: CICD-Pipeline
 on: # Triggers
   push:
-    branches: [ "main", "dev" ]
+    branches: [ "dev" ]
   pull_request:
     branches: [ "main" ]
   workflow_dispatch:
