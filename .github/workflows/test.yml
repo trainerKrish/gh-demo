@@ -12,15 +12,23 @@ jobs:
       - run: echo "hello" > abc.txt
       - run: ls -l 
       - run: sleep 10
+      - uses: actions/upload-artifact@v4
+        with:
+          name: karl-artifact
+          path:
+            - abc.txt
 
   job-2:
     needs: ["job-1"]
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: karl-artifact
       - run: ls -l  
   
-  job-3:
-    needs: ["job-1"]
-    runs-on: ubuntu-latest
-    steps:
-      - run: sleep 5
+  # job-3:
+  #   needs: ["job-1"]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - run: sleep 5
