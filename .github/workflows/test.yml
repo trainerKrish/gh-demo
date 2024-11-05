@@ -20,7 +20,7 @@ jobs:
       - run: ls -l  
   
   job-3:
-    needs: ["job-1s"]
+    needs: ["job-1"]
     runs-on: ubuntu-latest
     steps:
       - run: sleep 5
