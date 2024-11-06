@@ -10,3 +10,6 @@ jobs:
 
       - name: Install Python
         uses: actions/setup-python@v5
+
+      - name: Check Python Version
+        run: python3 -V
