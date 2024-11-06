@@ -25,4 +25,4 @@ jobs:
           python3 -m pip install pip --upgrade
           pip install -r requirements.txt
 
-      - run: echo "Completed"
+      - run: echo "Completed...!"
