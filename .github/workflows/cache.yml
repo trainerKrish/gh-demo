@@ -1,6 +1,6 @@
 on:
   push:
-    branches: ["main"]
+    branches: ["feature"]
 
 jobs:
   setup:
@@ -10,15 +10,17 @@ jobs:
 
       - name: Install Python
         uses: actions/setup-python@v5
+        with:
+          cache: 'pip'
 
       - name: Check Python Version
         run: python3 -V
       
-      - name: Cache dependencies
-        uses: actions/cache@v4
-        with:
-          key: pip-${{ hashFiles('requirements.txt') }}
-          path: ~/.cache/pip
+      # - name: Cache dependencies
+      #   uses: actions/cache@v4
+      #   with:
+      #     key: pip-${{ hashFiles('requirements.txt') }}
+      #     path: ~/.cache/pip
 
       - name: install dependencies
         run: |
