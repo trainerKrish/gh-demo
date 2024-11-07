@@ -6,5 +6,16 @@ on:
 jobs:
   job1:
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
     steps:
-      - run: echo ${{ toJson(github) }}
+      - run: echo "$MYVAR"
+        env: 
+          MYVAR: ${{ toJson(github) }}
+
+  job2:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/karl'
+    steps:
+      - run: echo "$MYVAR"
+        env: 
+          MYVAR: ${{ toJson(github) }}
