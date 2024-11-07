@@ -2,19 +2,23 @@ name: Condtion
 
 on: 
   push:
+  pull_request:
 
 jobs:
   job1:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
     steps:
       - run: echo "$MYVAR"
         env: 
           MYVAR: ${{ toJson(github) }}
+        if: github.ref == 'refs/heads/main'
+      
+      - run: echo "Hello"
+        
 
   job2:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/karl'
+    if: github.event_name == 'push'
     steps:
       - run: echo "$MYVAR"
         env: 
