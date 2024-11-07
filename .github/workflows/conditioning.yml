@@ -18,7 +18,7 @@ jobs:
 
   job2:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/karl' && githib.event_name == 'push'
+    if: github.ref == 'refs/heads/karl' && github.event_name == 'push'
     steps:
       - run: echo "$MYVAR"
         env: 
