@@ -4,7 +4,7 @@ on:
   push:
   pull_request:
 
-vars:
+env:
   AWS_ECR_REPO_NAME: flask-app
   AWS_ECS_CLUSTER_NAME: 'NA'
   AWS_ECS_SERVICE_NAME: 'NA'
@@ -27,7 +27,11 @@ jobs:
 
       # - name: Build the image
       #   run: |
-      #     docker build -t myapp .
+      #     docker build -t $REPO:latest .
+      #   env:
+      #     REPO: ${{ steps.ecr-data.outputs.registry }}
 
       - name: Print ECR Repo URI
         run: echo "${{ steps.ecr-data.outputs.registry }}"
+      - run: echo $AWS_ECR_REPO_NAME
+      - run: ${{ vars.AWS_ACCESS_KEY_ID }}
