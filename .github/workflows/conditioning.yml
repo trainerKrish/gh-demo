@@ -5,17 +5,13 @@ on:
   pull_request:
 
 jobs:
-  job1:
+  build:
     runs-on: ubuntu-latest
     environment: dev
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_REGION: ${{ vars.AWS_REGION }}
     steps:
-      - run: |
-          echo "${{ vars.AWS_REGION }}"
-
-  job2:
-    runs-on: ubuntu-latest
-    environment: prod
-    steps:
-      - run: |
-          echo "${{ vars.AWS_REGION }}"
+      - run: aws iam list-users
             
