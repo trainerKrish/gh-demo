@@ -4,6 +4,11 @@ on:
   push:
   pull_request:
 
+vars:
+  AWS_ECR_REPO_NAME: flask-app
+  AWS_ECS_CLUSTER_NAME: 'NA'
+  AWS_ECS_SERVICE_NAME: 'NA'
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -16,10 +21,13 @@ jobs:
       - name: Download the files
         uses: actions/checkout@v4
 
-      - name: Build the image
-        run: |
-          docker build -t myapp .
+      - name: Login to ECR
+        id: ecr-data
+        uses: aws-actions/amazon-ecr-login@v2
 
-      - name: List the images
-        run: docker image ls
-            
+      # - name: Build the image
+      #   run: |
+      #     docker build -t myapp .
+
+      - name: Print ECR Repo URI
+        run: echo "${{ steps.ecr-data.outputs.registry }}"
