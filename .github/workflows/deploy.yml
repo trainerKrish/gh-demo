@@ -25,13 +25,13 @@ jobs:
         id: ecr-data
         uses: aws-actions/amazon-ecr-login@v2
 
-      # - name: Build the image
-      #   run: |
-      #     docker build -t $REPO:latest .
-      #   env:
-      #     REPO: ${{ steps.ecr-data.outputs.registry }}
+      - name: Build the image
+        run: |
+          docker build -t $REPO/$AWS_ECR_REPO_NAME:latest .
+        env:
+          REPO: ${{ steps.ecr-data.outputs.registry }}
 
-      - name: Print ECR Repo URI
-        run: echo "${{ steps.ecr-data.outputs.registry }}"
-      - run: echo $AWS_ECR_REPO_NAME
-      - run: ${{ vars.AWS_ACCESS_KEY_ID }}
+      - name: Push the code to ECR
+        run: |
+          docker push $REPO/$AWS_ECR_REPO_NAME:latest
+
