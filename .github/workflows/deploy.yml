@@ -1,0 +1,25 @@
+name: Deploy
+
+on: 
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: dev
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_REGION: ${{ vars.AWS_REGION }}
+    steps:
+      - name: Download the files
+        uses: actions/checkout@v4
+
+      - name: Build the image
+        run: |
+          docker build -t myapp .
+
+      - name: List the images
+        run: docker image ls
+            
