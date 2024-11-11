@@ -7,19 +7,19 @@ on:
 jobs:
   job1:
     runs-on: ubuntu-latest
+    environment: dev
     steps:
-      - run: echo "$MYVAR"
-        env: 
-          MYVAR: ${{ toJson(github) }}
-        if: github.ref == 'refs/heads/main'
+      - run: |
+          echo "${{ secrets.AWS_ACCESS_KEY_ID }}"
+          echo "${{ vars.AWS_REGION }}"
       
       - run: echo "Hello"
         
 
-  job2:
-    runs-on: ubuntu-latest
-    if: github.event_name == 'push'
-    steps:
-      - run: echo "$MYVAR"
-        env: 
-          MYVAR: ${{ toJson(github) }}
+  # job2:
+  #   runs-on: ubuntu-latest
+  #   if: github.event_name == 'push'
+  #   steps:
+  #     - run: echo "$MYVAR"
+  #       env: 
+  #         MYVAR: ${{ toJson(github) }}
