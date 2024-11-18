@@ -34,4 +34,5 @@ jobs:
       - name: Push the code to ECR
         run: |
           docker push $REPO/$AWS_ECR_REPO_NAME:latest
-
+        env:
+          REPO: ${{ steps.ecr-data.outputs.registry }}
