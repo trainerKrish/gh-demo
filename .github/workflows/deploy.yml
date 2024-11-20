@@ -16,6 +16,7 @@ jobs:
     environment: dev
     outputs:
       REPO: ${{ steps.ecr-data.outputs.registry }} 
+      IMAGE: ${{ steps.dockerImage.outputs.image }} 
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -29,12 +30,17 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v2
 
       - name: Build and Push docker image
+        id: dockerImage
         run: |
           docker build -t $REPO/$AWS_ECR_REPO_NAME:$TAG .
           docker push $REPO/$AWS_ECR_REPO_NAME:$TAG
+          echo "image=$REPO/$AWS_ECR_REPO_NAME:$TAG" >> $GITHUB_OUTPUT
         env:
           REPO: ${{ steps.ecr-data.outputs.registry }}
           TAG: ${{ github.sha }}
+
+      - name: verify docker image
+        run: echo "${{ steps.dockerImage.outputs.image }}"
 
   deploy:
     needs: ["build"]
@@ -55,10 +61,7 @@ jobs:
         with:
           task-definition: task-definition.json
           container-name: flaskapp
-          image: $REPO/$AWS_ECR_REPO_NAME:$TAG
-        env:  
-          REPO: ${{ needs.build.outputs.REPO }}
-          TAG: ${{ github.sha }}
+          image: ${{ needs.build.outputs.IMAGE }}
 
       - name: Print the td.json
         run: cat task-definition.json
