@@ -16,7 +16,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello_world():
-    return "<p>Hello, World!</p>"
+    return "<p>Hello, Universe!</p>"
 
 
 # @app.route("/create-db")

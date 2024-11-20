@@ -6,8 +6,8 @@ on:
 
 env:
   AWS_ECR_REPO_NAME: flask-app
-  AWS_ECS_CLUSTER_NAME: 'KarlCluster'
-  AWS_ECS_SERVICE_NAME: 'WebAppService'
+  AWS_ECS_CLUSTER_NAME: KarlCluster
+  AWS_ECS_SERVICE_NAME: WebAppService
   TASK_DEFITION_FAMILY: webapp
 
 jobs:
@@ -70,6 +70,6 @@ jobs:
         uses: aws-actions/amazon-ecs-deploy-task-definition@v2
         with:
           task-definition: ${{ steps.task-def.outputs.task-definition }}
-          service: ${{ vars.AWS_ECS_SERVICE_NAME }}
-          cluster: ${{ vars.AWS_ECS_CLUSTER_NAME }}
+          service: $AWS_ECS_SERVICE_NAME
+          cluster: $AWS_ECS_CLUSTER_NAME
           wait-for-service-stability: true
