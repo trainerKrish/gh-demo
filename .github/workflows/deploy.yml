@@ -60,10 +60,13 @@ jobs:
           REPO: ${{ needs.build.outputs.REPO }}
           TAG: ${{ github.sha }}
 
+      - name: Print the td.json
+        run: cat task-definition.json
+
       - name: Deploy to Amazon ECS
         uses: aws-actions/amazon-ecs-deploy-task-definition@v2
         with:
           task-definition: task-definition.json
-          service: $AWS_ECS_SERVICE_NAME
-          cluster: $AWS_ECS_CLUSTER_NAME
+          service: ${{ vars.AWS_ECS_SERVICE_NAME }}
+          cluster: ${{ vars.AWS_ECS_CLUSTER_NAME }}
           wait-for-service-stability: true
