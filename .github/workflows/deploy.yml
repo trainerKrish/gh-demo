@@ -64,12 +64,12 @@ jobs:
           image: ${{ needs.build.outputs.IMAGE }}
 
       - name: Print the td.json
-        run: cat task-definition.json
+        run: cat ${{steps.task-def.outputs.task-definition}}
 
       - name: Deploy to Amazon ECS
         uses: aws-actions/amazon-ecs-deploy-task-definition@v2
         with:
           task-definition: ${{ steps.task-def.outputs.task-definition }}
-          service: $AWS_ECS_SERVICE_NAME
-          cluster: $AWS_ECS_CLUSTER_NAME
+          service: WebAppService
+          cluster: KarlCluster
           wait-for-service-stability: true
