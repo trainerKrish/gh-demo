@@ -1,5 +1,6 @@
 # import mysql.connector
 from flask import Flask
+import random
 # import time
 # import connection
 
@@ -13,10 +14,23 @@ from flask import Flask
 # )
 app = Flask(__name__)
 
+background_color = [
+'lightblue',
+'BlanchedAlmond',
+'YellowGreen',
+'Coral',
+'PeachPuff'
+]
 
+color = random.choice(background_color)
+    
 @app.route("/")
 def hello_world():
-    return "<p>Hello, Universe!</p>"
+    return """
+    <body style="background-color: {};">
+    <center><h1 style='font-size: 4em; color: black;'>Hello, Universe!</h1></center>
+    </body>
+    """.format(color)
 
 
 # @app.route("/create-db")
