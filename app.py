@@ -28,7 +28,7 @@ color = random.choice(background_color)
 def hello_world():
     return """
     <body style="background-color: {};">
-    <center><h1 style='font-size: 4em; color: black;'>Hello, Universe!</h1></center>
+    <center><h1 style='font-size: 4em; color: black;'>Hello, World!</h1></center>
     </body>
     """.format(color)
 
